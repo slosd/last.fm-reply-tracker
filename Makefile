@@ -10,7 +10,7 @@ parts = ${srcdir}header.js \
 				${srcdir}replytracker.js \
 				${srcdir}main.js
 
-lastfm-reply-tracker.js: ${parts}
+lastfm-reply-tracker.user.js: ${parts}
 	awk 'FNR==1 && NR!=1 {print ""}{print}' $^ > $@
 
 clean:
