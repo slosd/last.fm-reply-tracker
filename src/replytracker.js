@@ -88,22 +88,22 @@ ReplyTracker.prototype.buildBody = function() {
   button_down.href = "#";
   button_down.innerHTML = "&darr;";
   button_down.addEventListener("click", function(e) {
+    e.preventDefault();
     var index = klass.options["index"] = parseInt(klass.options["index"]) + 1;
     GM_setValue(klass.target+"_index", index);
     klass.updateBody.call(klass);
-    e.preventDefault();
   }, false);
   
   var button_up = document.createElement("a");
   button_up.href = "#";
   button_up.innerHTML = "&uarr;";
   button_up.addEventListener("click", function(e) {
+    e.preventDefault();
     var index = klass.options["index"] = parseInt(klass.options["index"]) - 1;
     if(index < 0)
-      return false;
+      return;
     GM_setValue(klass.target+"_index", index);
     klass.updateBody.call(klass);
-    e.preventDefault();
   }, false);
   
   this.elements.footer.appendChild(button_down);
