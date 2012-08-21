@@ -99,9 +99,10 @@ ReplyTracker.prototype.buildBody = function() {
   button_up.innerHTML = "&uarr;";
   button_up.addEventListener("click", function(e) {
     e.preventDefault();
-    var index = klass.options["index"] = parseInt(klass.options["index"]) - 1;
+    var index = parseInt(klass.options["index"]) - 1;
     if(index < 0)
       return;
+    klass.options["index"] = index;
     GM_setValue(klass.target+"_index", index);
     klass.updateBody.call(klass);
   }, false);
