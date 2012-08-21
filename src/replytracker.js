@@ -68,7 +68,7 @@ ReplyTracker.prototype.buildBody = function() {
   if(typeof this.elements.body != "undefined")
     return false;
   var klass = this,
-    first = this.getSibling();
+      first = this.getSibling();
 
   this.elements.header = document.createElement("h2");
   this.elements.header.setAttribute("id", "gmreplytracker");
@@ -110,12 +110,21 @@ ReplyTracker.prototype.buildBody = function() {
   this.elements.footer.appendChild(button_up);
 
   if(this.target == "home") {
-    body = document.createElement("div");
+    var body = document.createElement("div");
     body.setAttribute("id", "gmreplytracker");
-    body.setAttribute("class", "home-module");
-    body.appendChild(this.elements.header);
-    body.appendChild(this.elements.body);
-    body.appendChild(this.elements.footer);
+    body.setAttribute("class", "home-group");
+
+    var header = document.createElement("div");
+    header.setAttribute("class", "home-group-header");
+    header.appendChild(this.elements.header);
+
+    var content = document.createElement("div");
+    content.setAttribute("class", "home-group-content");
+    content.appendChild(this.elements.body);
+    content.appendChild(this.elements.footer);
+
+    body.appendChild(header);
+    body.appendChild(content);
     first.parentNode.insertBefore(body, first);
   }
   else {
@@ -129,14 +138,13 @@ ReplyTracker.prototype.buildBody = function() {
 ReplyTracker.prototype.getSibling = function() {
   var element;
   var index = GM_getValue(this.target+"_index", 0);
+  var first = document.getElementById("LastAd_mpu").nextElementSibling;
   
   if(this.target == "profile") {
-    var first = document.getElementById("LastAd_mpu").nextElementSibling;
     while((first.id == "gmreplytracker" || (first.className != "first heading" && first.className != "heading" && first.className != "module" || index-- > 0)) && first.nextElementSibling) first = first.nextElementSibling;
   }
   else {
-    var first = document.getElementById("launcherModule");
-    while((first.id == "gmreplytracker" || (first.className != "home-module" || index-- > 0)) && first.nextElementSibling) first = first.nextElementSibling;
+    while((first.id == "gmreplytracker" || (first.className != "home-group" || index-- > 0)) && first.nextElementSibling) first = first.nextElementSibling;
   }
   if(index > 0) {
     this.options["index"] = GM_getValue(this.target+"_index", index) - index;
@@ -148,7 +156,7 @@ ReplyTracker.prototype.getSibling = function() {
 ReplyTracker.prototype.updateBody = function() {
   var first = this.getSibling();
   if(this.target == "home") {
-    first.parentNode.insertBefore(this.elements.header.parentNode, first);
+    first.parentNode.insertBefore(this.elements.header.parentNode.parentNode, first);
   }
   else {
     first.parentNode.insertBefore(this.elements.header, first);
