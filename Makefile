@@ -2,6 +2,8 @@
 # Makefile for last.fm-reply-tracker
 #
 
+userscript = lastfm-reply-tracker.user.js
+
 srcdir = src/
 
 parts = ${srcdir}header.js \
@@ -10,8 +12,8 @@ parts = ${srcdir}header.js \
 				${srcdir}replytracker.js \
 				${srcdir}main.js
 
-lastfm-reply-tracker.user.js: ${parts}
+${userscript}: ${parts}
 	awk 'FNR==1 && NR!=1 {print ""}{print}' $^ > $@
 
 clean:
-	rm -f lastfm-reply-tracker.js
+	rm -f ${userscript}
