@@ -2,7 +2,7 @@
 // @name           Last.fm Reply tracker
 // @description    Adds a reply tracker to your profile page
 // @namespace      slosd@freedig.org
-// @version        14
+// @version        15
 // 
 // @include        http://www.last.fm/home
 // @include        http://www.lastfm.*/home
