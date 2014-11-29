@@ -23,15 +23,17 @@ ReplyTracker.prototype.elements = new Object();
 ReplyTracker.prototype.threads = new Array();
 
 ReplyTracker.prototype.loadTracker = function() {
-  if(GM_getValue("show_profile", this.user_options[0].default) == "yes" && this.isOwnProfile())
+  if (!unsafeWindow.LFM || !unsafeWindow.LFM.Session || !unsafeWindow.LFM.Session.userName) return;
+
+  this.options.username = unsafeWindow.LFM.Session.userName;
+  if(GM_getValue("show_profile", this.user_options[0].default) == "yes" && this.isOwnProfile(this.options.username)) {
     this.target = "profile";
-  else if(GM_getValue("show_home", this.user_options[1].default) && document.location.href.indexOf("/home") != -1) {
+  } else if(GM_getValue("show_home", this.user_options[1].default) && document.location.href.indexOf("/home") != -1) {
     this.target = "home";
-    if(document.getElementById("idBadgerUser"))
-      this.options.username = document.getElementById("idBadgerUser").href.replace(/^.*?\/user\/(.+?)(\/.*|$)/, "$1");
+  } else {
+    return;
   }
-  else
-    return false;
+
   this.loadOptions();
   this.updateFeed();
 }
@@ -51,9 +53,9 @@ ReplyTracker.prototype.loadOptions = function() {
   return true;
 }
 
-ReplyTracker.prototype.isOwnProfile = function() {
-  this.options.username = document.location.href.replace(/^.*?\/user\/(.+?)((#|\/).*|$)/, "$1");
-  try { return (document.getElementById("idBadgerUser").href == document.location.href); } catch(e) { return false; }
+ReplyTracker.prototype.isOwnProfile = function(username) {
+  var page_username = document.location.href.replace(/^.*?\/user\/(.+?)((#|\/).*|$)/, "$1");
+  return username === page_username;
 }
 
 ReplyTracker.prototype.showOptions = function() {
