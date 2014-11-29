@@ -142,12 +142,14 @@ ReplyTracker.prototype.getSibling = function() {
   var element;
   var index = GM_getValue(this.target+"_index", 0);
   var first = document.getElementById("LastAd_mpu").nextElementSibling;
-  
+
   if(this.target == "profile") {
-    while((first.id == "gmreplytracker" || (first.className != "first heading" && first.className != "heading" && first.className != "module" || index-- > 0)) && first.nextElementSibling) first = first.nextElementSibling;
+    while((first.id == "gmreplytracker" || (first.className != "first heading" && first.className != "heading" && first.className != "module" || index-- > 0)) && first.nextElementSibling) 
+      first = first.nextElementSibling;
   }
   else {
-    while((first.id == "gmreplytracker" || (first.className != "home-group" || index-- > 0)) && first.nextElementSibling) first = first.nextElementSibling;
+    while((first.id == "gmreplytracker" || (index-- > 0)) && first.nextElementSibling) 
+      first = first.nextElementSibling;
   }
   if(index > 0) {
     this.options["index"] = GM_getValue(this.target+"_index", index) - index;
