@@ -89,6 +89,9 @@ ReplyTracker.prototype.buildBody = function() {
   var button_down = document.createElement("a");
   button_down.href = "#";
   button_down.innerHTML = "&darr;";
+  button_down.style.padding = "3px 6px";
+  button_down.style.marginRight = "4px";
+  button_down.style.backgroundColor = "#eee";
   button_down.addEventListener("click", function(e) {
     e.preventDefault();
     var index = klass.options["index"] = parseInt(klass.options["index"]) + 1;
@@ -99,6 +102,9 @@ ReplyTracker.prototype.buildBody = function() {
   var button_up = document.createElement("a");
   button_up.href = "#";
   button_up.innerHTML = "&uarr;";
+  button_up.style.padding = "3px 6px";
+  button_up.style.marginRight = "4px";
+  button_up.style.backgroundColor = "#eee";
   button_up.addEventListener("click", function(e) {
     e.preventDefault();
     var index = parseInt(klass.options["index"]) - 1;
