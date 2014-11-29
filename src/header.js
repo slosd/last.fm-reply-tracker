@@ -10,4 +10,8 @@
 // @include        http://www.lastfm.*/user/*
 // @exclude        http://www.last.fm/user/*/*
 // @exclude        http://www.lastfm.*/user/*/*
+//
+// @grant          GM_getValue
+// @grant          GM_setValue
+// @grant          GM_xmlhttpRequest
 // ==/UserScript==
