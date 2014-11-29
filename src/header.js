@@ -2,7 +2,8 @@
 // @name           Last.fm Reply tracker
 // @description    Adds a reply tracker to your profile page
 // @namespace      slosd@freedig.org
-// @version        15
+// @version        16
+// @updateURL      https://raw.githubusercontent.com/slosd/last.fm-reply-tracker/master/lastfm-reply-tracker.user.js
 // 
 // @include        http://www.last.fm/home
 // @include        http://www.lastfm.*/home
